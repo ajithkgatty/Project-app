@@ -17,6 +17,17 @@
         <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, class: 'form-control' %>
       </div>
+      <%= fields_for( :tenant ) do |tenant_form| %>
+        <div class="form-group col-md-6 no-left-padding">
+          <%= tenant_form.label :name, 'Organization' %>
+          <span class='description'>(Unique name for your group or organization for the new account)</span>
+          <%= tenant_form.text_field :name, required: true, class: "form-control" %>
+        </div>
+        <div class="form-group col-md-6 no-right-padding">
+          <%= tenant_form.label :plan %>
+          <%= tenant_form.select :plan, options_for_select(Plan.options, params[:plan]),{}, required: true, class: "form-control" %>
+        </div>
+      <% end %>
       <%= f.submit t('.sign_up', default: 'Sign up'), class: 'btn btn-primary' %>
     <% end %>
   </div>
